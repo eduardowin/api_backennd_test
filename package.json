@@ -1,0 +1,19 @@
+{
+  "name": "api_backennd_test",
+  "version": "1.0.0",
+  "description": "api backend test for axa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eduardowin/api_backennd_test.git"
+  },
+  "author": "Eduardo Zuñiga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eduardowin/api_backennd_test/issues"
+  },
+  "homepage": "https://github.com/eduardowin/api_backennd_test#readme"
+}
