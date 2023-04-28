@@ -8,8 +8,8 @@ module.exports = Object.freeze({
         user: {
             users: '/v2/5808862710000087232b75ac'
         },
-        policies: {
-            users: '/v2/580891a4100000e8242b75c5'
+        police: {
+            policies: '/v2/580891a4100000e8242b75c5'
         }
     }
 });
