@@ -1,19 +1,9 @@
 const { Router } = require('express');
-const { check } = require('express-validator');
-
-const { validateFields } = require('../middlewares/validar-campos');
 const { login } = require('../controllers/auth');
+const { postSchema } = require('../schemaValidation/auth');
 
 const router = Router();
 
-router.post('/login', [
-    check('email', 'El correo es obligatorio').isEmail(),
-    check('password', 'La contraseña es obligatoria').not().isEmpty(),
-    validateFields
-], login);
-
-
-// router.get('/', validarJWT, renovarToken );
-
+router.post('/login', postSchema(), login);
 
 module.exports = router;

@@ -1,10 +1,9 @@
 const { Router } = require('express');
-const { query } = require('express-validator');
 
 const { querySchema } = require('../schemaValidation/police');
 const police = require('../controllers/police');
-const { validateRole } = require('../middlewares/validar-roles');
-const { validateJWT } = require('../middlewares/validar-jwt');
+const { validateRole } = require('../middlewares/validate-role');
+const { validateJWT } = require('../middlewares/validate-jwt');
 const constant = require('../config/constant');
 const router = Router();
 

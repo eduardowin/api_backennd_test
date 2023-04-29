@@ -7,6 +7,10 @@ Install
 
 Estructuras de carpetas
 
+Principales librerias:
+Axios
+nodemon
+
 Nodemon
 
 Development

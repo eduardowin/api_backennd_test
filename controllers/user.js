@@ -1,6 +1,5 @@
 const { response } = require('express');
-const bcryptjs = require('bcryptjs')
-
+const constant = require('../config/constant');
 const { getUsers } = require('../services/user');
 const { getPolicies } = require('../services/police');
 const { paginate } = require('../helpers/util');
@@ -21,7 +20,7 @@ const get = async(req, res = response) => {
         if (!user) {
             return res.status(404).json({
                 code: 1,
-                msg: 'Usuario no existe'
+                msg: constant.controller.user.msgUserNotExists
             });
         }
 
@@ -32,7 +31,8 @@ const get = async(req, res = response) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            msg: 'Hable con el administrador'
+            code: 1,
+            msg: constant.controller.user.msgCatchGet
         });
     }
 
@@ -65,7 +65,8 @@ const users = async(req, res = response) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            msg: 'Hable con el administrador'
+            code: 1,
+            msg: constant.controller.user.msgCatchGet
         });
     }
 }
@@ -86,15 +87,15 @@ const getByPoliceId = async(req, res = response) => {
         const police = policies.find(x => x.id === policeId);
         if (!police) {
             return res.status(404).json({
-                msg: 'La politica no existe'
+                msg: constant.controller.user.msgPoliceNotExists
             });
         }
 
-        // buscar usuarioo por id
+        // buscar usuario por id
         const user = users.find(x => x.id === police.clientId);
         if (!user) {
             return res.status(404).json({
-                msg: 'El usuario no existe'
+                msg: constant.controller.user.msgUserNotExists
             });
         }
 
@@ -105,7 +106,8 @@ const getByPoliceId = async(req, res = response) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            msg: 'Hable con el administrador'
+            code: 1,
+            msg: constant.controller.user.msgCatchGet
         });
     }
 

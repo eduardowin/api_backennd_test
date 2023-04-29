@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { validateJWT } = require('../middlewares/validar-jwt');
-const { validateRole } = require('../middlewares/validar-roles');
+const { validateJWT } = require('../middlewares/validate-jwt');
+const { validateRole } = require('../middlewares/validate-role');
 const { getIdSchema, querySchema, getBypoliceSchema } = require('../schemaValidation/user');
 
 const constant = require('../config/constant');
@@ -25,6 +25,5 @@ router.get('/bypolice/:policeId',
     getBypoliceSchema(),
     user.getByPoliceId);
 
-// router.get('/', validarJWT, renovarToken );
 
 module.exports = router;

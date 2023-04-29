@@ -1,6 +1,5 @@
 const { response } = require('express');
-const bcryptjs = require('bcryptjs')
-
+const constant = require('../config/constant');
 const { getUsers } = require('../services/user');
 const { getPolicies } = require('../services/police');
 const { paginate } = require('../helpers/util');
@@ -43,7 +42,8 @@ const get = async(req, res = response) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            msg: 'Hable con el administrador'
+            code: 1,
+            msg: constant.controller.user.msgCatchGet
         });
     }
 }

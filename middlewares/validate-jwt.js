@@ -1,5 +1,6 @@
 const { response, request } = require('express');
 const jwt = require('jsonwebtoken');
+const constant = require('../config/constant');
 
 const validateJWT = async(req = request, res = response, next) => {
 
@@ -7,7 +8,7 @@ const validateJWT = async(req = request, res = response, next) => {
 
     if (!token) {
         return res.status(403).json({
-            msg: 'No hay token en la petición'
+            msg: constant.middlewares.validateJwt.msgJwtNotExists
         });
     }
 
@@ -23,7 +24,7 @@ const validateJWT = async(req = request, res = response, next) => {
 
         console.log(error);
         res.status(403).json({
-            msg: 'Token no válido'
+            msg: constant.middlewares.validateJwt.msgCatchVerify
         })
     }
 

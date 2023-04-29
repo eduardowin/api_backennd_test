@@ -1,10 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-// const fileUpload = require('express-fileupload');
 const { createServer } = require('http');
-
-// const { dbConnection } = require('../database/config');
-// const { socketController } = require('../sockets/controller');
 
 class Server {
 
@@ -16,10 +12,9 @@ class Server {
         // Asignar path de endpoint por entidad o controller
         this.paths = {
             auth: '/api/auth',
-            user: '/api/user',
-            police: '/api/police',
+            user: '/api/users',
+            police: '/api/policies',
         }
-
 
         // Conectar a base de datos en caso hubiera
 
@@ -34,7 +29,6 @@ class Server {
         await dbConnection();
     }
 
-
     middlewares() {
 
         // Configurar CORS
@@ -42,16 +36,6 @@ class Server {
 
         // Lectura y parseo del body
         this.app.use(express.json());
-
-        // Directorio Público
-        // this.app.use(express.static('public'));
-
-        // Fileupload - Carga de archivos
-        // this.app.use(fileUpload({
-        //     useTempFiles: true,
-        //     tempFileDir: '/tmp/',
-        //     createParentPath: true
-        // }));
 
     }
 

@@ -7,11 +7,9 @@ const User = {
     },
     name: {
         type: String,
-        required: [true, 'El nombre es obligatorio']
     },
     email: {
         type: String,
-        required: [true, 'El correo es obligatorio'],
         unique: true
     },
     role: {
