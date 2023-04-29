@@ -1,11 +1,9 @@
 const { response } = require('express');
 const bcryptjs = require('bcryptjs')
 
-const User = require('../models/user');
-
-const { generateJWT } = require('../helpers/generate-jwt');
 const { getUsers } = require('../services/user');
 const { getPolicies } = require('../services/police');
+const { paginate } = require('../helpers/util');
 
 const get = async(req, res = response) => {
 
@@ -44,11 +42,12 @@ const users = async(req, res = response) => {
 
     const name = req.query.name;
     try {
-        // Agregar Paginado para no mostrar todoso los datos
-        // Agregar Paginado para no mostrar todoso los datos
-        // Agregar Paginado para no mostrar todoso los datos
-        // Agregar Paginado para no mostrar todoso los datos
-        // Agregar Paginado para no mostrar todoso los datos
+
+        // Paginacion logica de paginacion para no devolver todo el universo de datos
+        let page = 1
+        let pageSize = 10
+        if (req.query.page != undefined) page = req.query.page;
+        if (req.query.pageSize != undefined) pageSize = req.query.pageSize;
 
         // Llamada asincrona y en paralela para obtener usuarios del endpoint
         const [users] = await Promise.all([
@@ -57,16 +56,10 @@ const users = async(req, res = response) => {
 
         // buscar usuario por id dentro de la lista.
         const usersFiltered = users.filter(x => x.name.indexOf(name) > -1);
-        if (usersFiltered && usersFiltered.lenght == 0) {
-            return res.status(200).json({
-                code: 1,
-                msg: 'No se encontraron coincidencias en la busqueda'
-            });
-        }
 
         res.json({
             code: 0,
-            result: usersFiltered
+            result: paginate(usersFiltered, pageSize, page)
         })
 
     } catch (error) {
@@ -105,9 +98,9 @@ const getByPoliceId = async(req, res = response) => {
             });
         }
 
-        res.json({
+        res.json(
             user
-        })
+        )
 
     } catch (error) {
         console.log(error)

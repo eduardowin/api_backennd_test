@@ -1,25 +1,29 @@
 const { Router } = require('express');
-const { check, query } = require('express-validator');
-const { validarJWT } = require('../middlewares/validar-jwt');
+const { validateJWT } = require('../middlewares/validar-jwt');
+const { validateRole } = require('../middlewares/validar-roles');
+const { getIdSchema, querySchema, getBypoliceSchema } = require('../schemaValidation/user');
 
+const constant = require('../config/constant');
 const user = require('../controllers/user');
-
 const router = Router();
 
 router.get('/:id',
-    validarJWT, [
-        check('id').exists().withMessage('El parametro id es obligatorio')
-    ], user.get);
+    validateJWT,
+    validateRole(constant.role.admin, constant.role.user),
+    getIdSchema(),
+    user.get);
 
 router.get('/',
-    validarJWT, [
-        query('name').exists().withMessage('El parametro name es obligatorio en el query')
-    ], user.users);
+    validateJWT,
+    validateRole(constant.role.admin, constant.role.user),
+    querySchema(),
+    user.users);
 
 router.get('/bypolice/:policeId',
-    validarJWT, [
-        check('policeId').exists().withMessage('El paramatro id de la politica es obligatorio')
-    ], user.getByPoliceId);
+    validateJWT,
+    validateRole(constant.role.admin),
+    getBypoliceSchema(),
+    user.getByPoliceId);
 
 // router.get('/', validarJWT, renovarToken );
 

@@ -1,7 +1,7 @@
 const { response, request } = require('express');
 const jwt = require('jsonwebtoken');
 
-const validarJWT = async(req = request, res = response, next) => {
+const validateJWT = async(req = request, res = response, next) => {
 
     const token = req.header('Authorization').split(" ")[1];
 
@@ -13,25 +13,10 @@ const validarJWT = async(req = request, res = response, next) => {
 
     try {
 
+        // Verificar token y obtener data de usuario
         const { uid } = jwt.verify(token, process.env.KEY_JWT);
+        req.user = uid;
 
-        // // leer el usuario que corresponde al uid
-        // const usuario = await Usuario.findById(uid);
-
-        // if (!usuario) {
-        //     return res.status(401).json({
-        //         msg: 'Token no válido - usuario no existe DB'
-        //     })
-        // }
-
-        // Verificar si el uid tiene estado true
-        // if (!usuario.estado) {
-        //     return res.status(401).json({
-        //         msg: 'Token no válido - usuario con estado: false'
-        //     })
-        // }
-
-        // req.usuario = usuario;
         next();
 
     } catch (error) {
@@ -45,5 +30,5 @@ const validarJWT = async(req = request, res = response, next) => {
 }
 
 module.exports = {
-    validarJWT
+    validateJWT
 }

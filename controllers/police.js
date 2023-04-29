@@ -1,17 +1,20 @@
 const { response } = require('express');
 const bcryptjs = require('bcryptjs')
 
-const User = require('../models/user');
-
 const { getUsers } = require('../services/user');
 const { getPolicies } = require('../services/police');
+const { paginate } = require('../helpers/util');
 
 const get = async(req, res = response) => {
 
     const name = req.query.userName;
 
     try {
-        // Agregar Paginado para no mostrar todoso los datos
+        // Paginacion logica de paginacion para no devolver todo el universo de datos
+        let page = 1
+        let pageSize = 10
+        if (req.query.page != undefined) page = req.query.page;
+        if (req.query.pageSize != undefined) pageSize = req.query.pageSize;
 
         // Llamada asincrona y en paralela para obtener usuarios y politicas
         const [users, policies] = await Promise.all([
@@ -19,26 +22,22 @@ const get = async(req, res = response) => {
             getPolicies()
         ]);
 
-        console.log(policies)
-
-        // buscar usuario por id dentro de la lista.
+        // Buscar usuario por id dentro de la lista.
         const usersFiltered = users.filter(x => x.name.indexOf(name) > -1);
-        if (usersFiltered && usersFiltered.lenght == 0) {
-            return res.status(200).json({
-                code: 1,
-                msg: 'No se encontraron coincidencias en la busqueda'
-            });
-        }
 
-        usersFiltered.forEach(user => {
-            const policiesByUser = policies.filter(x => x.clientId == user.id);
-            console.log(policiesByUser);
-            user.policies = policiesByUser;
-        });
-        console.log(usersFiltered)
+        // Buscamos cada police asociados a cada usuario previamente filtrado
+        let policeFiltered = []
+        policies.forEach(r => {
+            const user = usersFiltered.find(x => x.id === r.clientId);
+            if (user) {
+                r.name = user.name
+                policeFiltered.push(r)
+            }
+        })
+
         res.json({
             code: 0,
-            result: usersFiltered
+            result: paginate(policeFiltered, pageSize, page)
         })
 
     } catch (error) {
