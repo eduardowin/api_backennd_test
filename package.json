@@ -4,7 +4,7 @@
   "description": "api backend test for axa",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env NODE_ENV=test jest --coverage --watch --silent=false  --runInBand"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,20 @@
     "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.0",
     "nodemon": "^2.0.22"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.1",
+    "cross-env": "^7.0.3",
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "engines": {
+    "node": "16.x"
   }
 }

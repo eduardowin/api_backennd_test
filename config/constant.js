@@ -16,59 +16,59 @@ module.exports = Object.freeze({
         police: {
             query: {
                 field: 'userName',
-                msg: 'El parametro userName es obligatorio en el query'
+                msg: 'The parameter userName is mandatory in the query'
             }
         },
         user: {
             id: {
                 field: 'id',
-                msg: 'El parametro id es obligatorio'
+                msg: 'The id parameter is mandatory'
             },
             query: {
                 field: 'name',
-                msg: 'El parametro name es obligatorio en el query'
+                msg: 'The name parameter is mandatory in the query'
             },
             policeId: {
                 field: 'policeId',
-                msg: 'El paramatro id de la politica es obligatorio'
+                msg: 'The id parameter of the policy is mandatory.'
             }
         },
         auth: {
             query: {
                 email: {
                     field: 'email',
-                    msg: 'El correo es obligatorio'
+                    msg: 'Email is mandatory'
                 },
                 password: {
                     field: 'password',
-                    msg: 'La contraseña es obligatoria'
+                    msg: 'Password is mandatory'
                 },
             }
         }
     },
     middlewares: {
         validateRole: {
-            msgUserNotExists: 'Se quiere verificar el role sin validar el token primero',
-            msgRoleMandatory: 'El servicio requiere uno de estos roles:'
+            msgUserNotExists: 'You want to verify the role without validating the token first',
+            msgRoleMandatory: 'The service requires one of these roles:'
         },
         validateJwt: {
-            msgJwtNotExists: 'No hay token en la petición',
-            msgCatchVerify: 'Token no válido'
+            msgJwtNotExists: 'No token in the request',
+            msgCatchVerify: 'Invalid token'
         }
     },
     helpers: {
         generateJwt: {
-            msgJwtNoGenerated: 'No se pudo generar el token'
+            msgJwtNoGenerated: 'Could not generate token'
         }
     },
     controller: {
         user: {
-            msgCatchGet: 'Hable con el administrador',
-            msgUserNotExists: 'Usuario no existe',
-            msgPoliceNotExists: 'La politica no existe'
+            msgCatchGet: 'Talk to the administrator',
+            msgUserNotExists: 'User does not exist',
+            msgPoliceNotExists: 'Policy does not exist'
         },
         auth: {
-            msgUserOrPassNotRight: 'Usuario / Password no son correctos - password'
+            msgUserOrPassNotRight: 'User / Password are not correct - password'
         }
     }
 

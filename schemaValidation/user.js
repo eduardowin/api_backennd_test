@@ -4,7 +4,7 @@ const { validateFields } = require('../middlewares/validate-fields');
 
 exports.getIdSchema = () => {
     return [
-        check(constant.schemaValidation.user.id.field).exists().withMessage(constant.schemaValidation.user.id.msg),
+        param(constant.schemaValidation.user.id.field, constant.schemaValidation.user.id.msg).exists().isLength({ min: 2 }),
         validateFields
     ]
 }
