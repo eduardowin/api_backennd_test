@@ -4,7 +4,8 @@
   "description": "api backend test for axa",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --coverage --watch --silent=false  --runInBand"
+    "test": "cross-env NODE_ENV=test jest --coverage a --watchAll --silent --runInBand",
+    "test:watch": "cross-env NODE_ENV=test jest --coverage a --watchAll --silent --runInBand"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,10 @@
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
+    ],
+    "coverageReporters": [
+      "json",
+      "html"
     ]
   },
   "engines": {
