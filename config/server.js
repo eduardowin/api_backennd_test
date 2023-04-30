@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const { createServer } = require('http');
+const swaggerUI = require("swagger-ui-express")
+const openApiConfigration = require("../docs/swagger")
 
 class Server {
 
@@ -8,6 +10,9 @@ class Server {
         this.app = express();
         this.port = process.env.PORT;
         this.server = createServer(this.app);
+        this.app.use('/documentation',
+            swaggerUI.serve,
+            swaggerUI.setup(openApiConfigration))
 
         // Asignar path de endpoint por entidad o controller
         this.paths = {
@@ -23,10 +28,8 @@ class Server {
 
         // Rutas de la aplicación
         this.routes();
-    }
 
-    async conectarDB() {
-        await dbConnection();
+
     }
 
     middlewares() {
@@ -47,10 +50,6 @@ class Server {
 
     }
 
-
-    sockets() {
-        this.io.on('connection', (socket) => socketController(socket, this.io))
-    }
 
     listen() {
         this.server.listen(this.port, () => {
