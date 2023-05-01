@@ -47,7 +47,9 @@ class Server {
         this.app.use(this.paths.auth, require('../routes/auth'));
         this.app.use(this.paths.user, require('../routes/user'));
         this.app.use(this.paths.police, require('../routes/police'));
-
+        this.app.get('*', function(req, res) {
+            res.redirect('/documentation');
+        });
     }
 
 

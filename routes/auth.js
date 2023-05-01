@@ -10,7 +10,7 @@ const router = Router();
  * /auth/login:
  *    post:
  *      tags:
- *        - auth
+ *        - Auth
  *      summary: "Login user"
  *      description: Login to a new user and get the session token
  *      responses:
@@ -32,5 +32,7 @@ const router = Router();
  *        description: Invalid authentication credentials
  */
 router.post('/login', postSchema(), login);
+
+
 
 module.exports = router;
