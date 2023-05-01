@@ -1,9 +1,14 @@
-# Api backend test for Axa
-api backennd test
+# Api Backend Test for Axa
+This readme presents the considerations and commands needed in the different stages of the project development, from its creation to the deployment to production using fly.io cloud service, the project is under NodeJS and other known and supported libraries that will also be discussed below.
 
+## Installation
+The following libraries were installed with the commands:
+- npm i axios, 
 
-
-Install
+- npm i express
+- npm i express-validator
+- npm i jsonwebtoken
+- npm i swagger-jsdoc
 
 Estructuras de carpetas
 
