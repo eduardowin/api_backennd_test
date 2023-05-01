@@ -63,7 +63,7 @@ const swaggerDefinition = {
         version: "1.0.1",
     },
     servers: [{
-            url: "http://localhost:3010/api",
+            url: "http://localhost:3000/api",
         },
         {
             url: "https://apibackendaxa.fly.dev/api",
