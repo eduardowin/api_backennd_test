@@ -25,7 +25,7 @@ const swaggerDefinition = {
             }
         },
         schemas: {
-            authLogin: {
+            auth: {
                 type: "object",
                 required: ["email", "password"],
                 properties: {
