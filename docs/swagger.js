@@ -4,6 +4,58 @@ const swaggerJsdoc = require("swagger-jsdoc");
  * API Config Info
  */
 
+const userSchema = {
+    type: "object",
+    properties: {
+        id: {
+            type: "string",
+        },
+        name: {
+            type: "string",
+        },
+        email: {
+            type: "string",
+        },
+        role: {
+            type: "string",
+        }
+    }
+}
+
+const policySchema = {
+    type: "object",
+    properties: {
+        id: {
+            type: "string",
+        },
+        amountInsured: {
+            type: "number",
+        },
+        email: {
+            type: "string",
+        },
+        inceptionDate: {
+            type: "string",
+        },
+        installmentPayment: {
+            type: "boolean",
+        },
+        clientId: {
+            type: "string",
+        }
+    }
+}
+
+const policyWithUserSchema = {
+    ...policySchema,
+    properties: {
+        ...policySchema.properties,
+        name: {
+            type: "string",
+        }
+    }
+}
+
 const swaggerDefinition = {
     openapi: "3.0.0",
     info: {
@@ -37,47 +89,32 @@ const swaggerDefinition = {
                     },
                 },
             },
-            user: {
+            user: userSchema,
+            policy: policySchema,
+            resultList: {
                 type: "object",
                 properties: {
-                    id: {
-                        type: "string",
-                    },
-                    name: {
-                        type: "string",
-                    },
-                    email: {
-                        type: "string",
-                    },
-                    role: {
-                        type: "string",
-                    }
-                },
-            },
-            policy: {
-                type: "object",
-                properties: {
-                    id: {
-                        type: "string",
-                    },
-                    amountInsured: {
+                    code: {
                         type: "number",
                     },
-                    email: {
-                        type: "string",
-                    },
-                    inceptionDate: {
-                        type: "string",
-                    },
-                    installmentPayment: {
-                        type: "boolean",
-                    },
-                    clientId: {
-                        type: "string",
+                    result: {
+                        type: "array",
+                        items: userSchema
                     }
-                },
+                }
+            },
+            resultListPolicies: {
+                type: "object",
+                properties: {
+                    code: {
+                        type: "number",
+                    },
+                    result: {
+                        type: "array",
+                        items: policyWithUserSchema
+                    }
+                }
             }
-
         }
     },
 };
