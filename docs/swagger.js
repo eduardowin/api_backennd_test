@@ -66,7 +66,7 @@ const swaggerDefinition = {
             url: "http://localhost:3010/api",
         },
         {
-            url: "https://afternoon-journey-32165.herokuapp.com/api",
+            url: "https://apibackendaxa.fly.dev/api",
         },
     ],
     components: {

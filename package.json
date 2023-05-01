@@ -4,6 +4,7 @@
   "description": "api backend test for axa",
   "main": "index.js",
   "scripts": {
+    "start": "node app",
     "test": "cross-env NODE_ENV=test jest --coverage a --watchAll --silent --runInBand",
     "test:watch": "cross-env NODE_ENV=test jest --coverage a --watchAll --silent --runInBand"
   },
